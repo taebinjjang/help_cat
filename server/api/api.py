@@ -5,21 +5,35 @@ import json
 
 app = Flask(__name__)
 app.debug = True
-app.config['JSON_AS_ASCII']=False
+# app.config['JSON_AS_ASCII']=False
 
 devices = []
 
 cats_data = []
 
 
+@app.route('/api/device/<device_id>')
+def device(device_id):
+    for device in devices:
+        if(device["device_id"] == device_id):
+            data = json.dumps(device,ensure_ascii=False)
+            return data
+    return jsonify(
+        {
+            "stsus" : True,
+            "error" :"없는 id입니다."
+        }
+    )
+
 @app.route('/api/devices')
 def devicess():
     data = {
-        "devices":devices
+        "devices" : devices
     }
-    print(data)
-    # data = json.dumps(data, ensure_ascii=False)
-    return jsonify(data)
+    data = json.dumps(data, ensure_ascii=False)
+    return data
+
+
 
 @app.route('/api/cat_data',methods=['POST'])
 def post_cat_data():
@@ -32,7 +46,7 @@ def post_cat_data():
 
     for device in devices:
         if(data["device"]==device["device_id"]):
-             cats_data.append(data)
+             device["cat_data"].append(data)
              return jsonify(
                     {
                         "status" : True,
@@ -49,7 +63,7 @@ def post_cat_data():
     )
 
 @app.route('/api/register_devices',methods=['POST'])
-def device():
+def register_device():
     data = {
             "device_id" : request.form['device_id'],
             "korean_adress": request.form['korean_adress'],
@@ -57,6 +71,7 @@ def device():
             "longtitude": request.form['longtitude'],
             "description": request.form['description'],
             "install_data": request.form['install_data'],
+            "cat_data" : []
         }
     devices.append(data)
     return jsonify({
@@ -66,4 +81,4 @@ def device():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
