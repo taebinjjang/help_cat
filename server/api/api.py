@@ -16,7 +16,8 @@ cats_data = []
 def device(device_id):
     for device in devices:
         if(device["device_id"] == device_id):
-            return jsonify(device)
+            data = json.dumps(device,ensure_ascii=False)
+            return data
     return jsonify(
         {
             "stsus" : True,
@@ -29,7 +30,6 @@ def devicess():
     data = {
         "devices" : devices
     }
-    print(data)
     data = json.dumps(data, ensure_ascii=False)
     return data
 
