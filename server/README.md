@@ -61,7 +61,8 @@ Responce
       "latitude" : 9.2739729,
       "longitude" : 83.33929,
       "description" : "비고",
-      "install-date" : "2017-04-01"
+      "install-date" : "2017-04-01",
+      "남은_밥량" : "900"
     },
     {
       "device_id" : 12345,
@@ -69,7 +70,8 @@ Responce
       "latitude" : 9.2739729,
       "longitude" : 83.33929,
       "description" : "비고",
-      "install-date" : "2017-04-01"
+      "install-date" : "2017-04-01",
+      "남은_밥량" : "900"
     }
   ]
 }
