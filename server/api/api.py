@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 app.debug = True
-app.config['JSON_AS_ASCII']=False
+# app.config['JSON_AS_ASCII']=False
 
 devices = []
 
@@ -27,11 +27,11 @@ def device(device_id):
 @app.route('/api/devices')
 def devicess():
     data = {
-        "devices":devices
+        "devices" : devices
     }
     print(data)
-    # data = json.dumps(data, ensure_ascii=False)
-    return jsonify(data)
+    data = json.dumps(data, ensure_ascii=False)
+    return data
 
 
 
