@@ -1,11 +1,11 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+import datetime
 import json
 
 app = Flask(__name__)
 app.debug = True
-# app.config['JSON_AS_ASCII']=False
 
 devices = []
 
@@ -40,8 +40,8 @@ def post_cat_data():
     data = {
         "device" : request.form['device'],
         "left_food" : request.form['left_food'],
-        "arrive_time" : request.form['arrive_time'],
-        "leave_time" : request.form['leave_time']
+        "left_water" : request.form['left_water'],
+        "time" : str(datetime.datetime.now())
     }
 
     for device in devices:
